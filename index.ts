@@ -1,7 +1,29 @@
 import Server from './classes/server';
+import userRoutes from './routes/usuario';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+
 
 const server = new Server();
 console.log('hola mundo!!! cead');
+
+// BodyParser funcion que se ejecuta en nuestra aplicacion
+//para preparar la obtencion de los datos en json
+//genera request y response
+server.app.use( bodyParser.urlencoded({ extended : true}) ); 
+server.app.use( bodyParser.json() );
+
+// Rutas de mi app
+server.app.use('/user',userRoutes);
+
+// conectar con mongo db
+mongoose.connect('mongodb://localhost:27017/fotosgram',
+                {useNewUrlParser: true, useCreateIndex: true}, // trabajar con indeces mongodb y levantar la db
+                  ( err ) => {
+                    if( err ) throw err;
+                    console.log('BASE DATOS ONLINE');
+                  }
+                );
 
 // levantar express
 server.start( () => {
@@ -27,7 +49,13 @@ npm install bcrypt               -> encriotar las contraseñas de nuestros usuar
 npm install @types/express
 
 npm install express body-parser cors mongoose express-fileupload jsonwebtoken bcrypt solo para desarrollo en package,json
- "devDependencies": {
+ 
+
+  npm install @types/mongoose  --save-dev   solo se guaradran para dev depndenciaes para desarrollo
+  npm install @types/express   --save-dev
+
+
+  "devDependencies": {
     "@types/express": "^4.17.1"
   }
 
