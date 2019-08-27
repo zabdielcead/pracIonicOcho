@@ -30,6 +30,13 @@ server.start( () => {
     console.log(`Servidor corriendo en puerto ${server.port} `);
 });
 
+
+/*
+para un proyecto simple 
+    npm init: el cual genera el package.json
+    tsc --init crea el tsconfig.json 
+ */
+
 // tsc -w    : para que escuche los cambios en ts y crea o compila el dist/index.js
 // nodemon dist: para que ejecute lo que hay en la carpeta dist
 
