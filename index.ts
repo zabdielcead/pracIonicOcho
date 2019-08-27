@@ -18,7 +18,7 @@ server.app.use('/user',userRoutes);
 
 // conectar con mongo db
 mongoose.connect('mongodb://localhost:27017/fotosgram',
-                {useNewUrlParser: true, useCreateIndex: true}, // trabajar con indeces mongodb y levantar la db
+                {useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false }, // trabajar con indeces mongodb y levantar la db
                   ( err ) => {
                     if( err ) throw err;
                     console.log('BASE DATOS ONLINE');
@@ -51,10 +51,10 @@ npm install @types/express
 npm install express body-parser cors mongoose express-fileupload jsonwebtoken bcrypt solo para desarrollo en package,json
  
 
-  npm install @types/mongoose  --save-dev   solo se guaradran para dev depndenciaes para desarrollo
-  npm install @types/express   --save-dev
-
-
+  npm install @types/mongoose     --save-dev   solo se guaradran para dev depndenciaes para desarrollo
+  npm install @types/express      --save-dev
+  npm install @types/bcrypt       --save-dev
+  npm install @types/jsonwebtoken --save-dev
   "devDependencies": {
     "@types/express": "^4.17.1"
   }
