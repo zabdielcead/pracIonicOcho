@@ -124,4 +124,14 @@ userRoutes.post('/update', verificaToken ,( req: any, res: Response) =>{
 
 });    
 
+userRoutes.get('/', [verificaToken], (req:any, res: Response) => {  // verificar el token correcto
+    const usuario = req.usuario;
+    
+    res.json({
+        ok:true,
+        usuario
+    });
+
+});
+
 export default userRoutes;

@@ -2,6 +2,8 @@ import Server from './classes/server';
 import userRoutes from './routes/usuario';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import postRoutes from './routes/post';
+import fileUpload from 'express-fileupload';
 
 
 const server = new Server();
@@ -13,8 +15,18 @@ console.log('hola mundo!!! cead');
 server.app.use( bodyParser.urlencoded({ extended : true}) ); 
 server.app.use( bodyParser.json() );
 
+// fileUpload
+server.app.use( fileUpload() );
+// por si no sirve  el fileupload la imagen tiene 0 bytes se soluciona con esto
+//server.app.use( fileUpload ({useTempFiles:true}));
+
+
+
+
+
 // Rutas de mi app
 server.app.use('/user',userRoutes);
+server.app.use('/posts', postRoutes);
 
 // conectar con mongo db
 mongoose.connect('mongodb://localhost:27017/fotosgram',
@@ -62,9 +74,16 @@ npm install express body-parser cors mongoose express-fileupload jsonwebtoken bc
   npm install @types/express      --save-dev
   npm install @types/bcrypt       --save-dev
   npm install @types/jsonwebtoken --save-dev
+  npm install @types/express-fileupload --save-dev
+   npm install @types/uniqid --save-dev
+
   "devDependencies": {
     "@types/express": "^4.17.1"
   }
+
+
+  generar ids unicos 
+  npm install uniqid
 
 
 */

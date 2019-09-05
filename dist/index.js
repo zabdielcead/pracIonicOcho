@@ -7,6 +7,8 @@ const server_1 = __importDefault(require("./classes/server"));
 const usuario_1 = __importDefault(require("./routes/usuario"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const body_parser_1 = __importDefault(require("body-parser"));
+const post_1 = __importDefault(require("./routes/post"));
+const express_fileupload_1 = __importDefault(require("express-fileupload"));
 const server = new server_1.default();
 console.log('hola mundo!!! cead');
 // BodyParser funcion que se ejecuta en nuestra aplicacion
@@ -14,8 +16,13 @@ console.log('hola mundo!!! cead');
 //genera request y response
 server.app.use(body_parser_1.default.urlencoded({ extended: true }));
 server.app.use(body_parser_1.default.json());
+// fileUpload
+server.app.use(express_fileupload_1.default());
+// por si no sirve  el fileupload la imagen tiene 0 bytes se soluciona con esto
+//server.app.use( fileUpload ({useTempFiles:true}));
 // Rutas de mi app
 server.app.use('/user', usuario_1.default);
+server.app.use('/posts', post_1.default);
 // conectar con mongo db
 mongoose_1.default.connect('mongodb://localhost:27017/fotosgram', { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false }, // trabajar con indeces mongodb y levantar la db
 (err) => {
@@ -27,6 +34,11 @@ mongoose_1.default.connect('mongodb://localhost:27017/fotosgram', { useNewUrlPar
 server.start(() => {
     console.log(`Servidor corriendo en puerto ${server.port} `);
 });
+/*
+para un proyecto simple
+    npm init: el cual genera el package.json
+    tsc --init crea el tsconfig.json
+ */
 // tsc -w    : para que escuche los cambios en ts y crea o compila el dist/index.js
 // nodemon dist: para que ejecute lo que hay en la carpeta dist
 // instalaciones
@@ -50,9 +62,16 @@ npm install express body-parser cors mongoose express-fileupload jsonwebtoken bc
   npm install @types/express      --save-dev
   npm install @types/bcrypt       --save-dev
   npm install @types/jsonwebtoken --save-dev
+  npm install @types/express-fileupload --save-dev
+   npm install @types/uniqid --save-dev
+
   "devDependencies": {
     "@types/express": "^4.17.1"
   }
+
+
+  generar ids unicos
+  npm install uniqid
 
 
 */ 
