@@ -9,6 +9,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const post_1 = __importDefault(require("./routes/post"));
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
+const cors_1 = __importDefault(require("cors"));
 const server = new server_1.default();
 console.log('hola mundo!!! cead');
 // BodyParser funcion que se ejecuta en nuestra aplicacion
@@ -20,6 +21,8 @@ server.app.use(body_parser_1.default.json());
 server.app.use(express_fileupload_1.default());
 // por si no sirve  el fileupload la imagen tiene 0 bytes se soluciona con esto
 //server.app.use( fileUpload ({useTempFiles:true}));
+// configurar el cors
+server.app.use(cors_1.default({ origin: true, credentials: true }));
 // Rutas de mi app
 server.app.use('/user', usuario_1.default);
 server.app.use('/posts', post_1.default);
@@ -63,6 +66,7 @@ npm install express body-parser cors mongoose express-fileupload jsonwebtoken bc
   npm install @types/bcrypt       --save-dev
   npm install @types/jsonwebtoken --save-dev
   npm install @types/express-fileupload --save-dev
+  npm install @types/cors --save-dev
    npm install @types/uniqid --save-dev
 
   "devDependencies": {

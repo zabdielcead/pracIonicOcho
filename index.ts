@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import postRoutes from './routes/post';
 import fileUpload from 'express-fileupload';
+import cors from 'cors';
 
 
 const server = new Server();
@@ -22,7 +23,8 @@ server.app.use( fileUpload() );
 
 
 
-
+// configurar el cors
+server.app.use( cors({ origin:true, credentials: true })  );
 
 // Rutas de mi app
 server.app.use('/user',userRoutes);
@@ -75,6 +77,7 @@ npm install express body-parser cors mongoose express-fileupload jsonwebtoken bc
   npm install @types/bcrypt       --save-dev
   npm install @types/jsonwebtoken --save-dev
   npm install @types/express-fileupload --save-dev
+  npm install @types/cors --save-dev
    npm install @types/uniqid --save-dev
 
   "devDependencies": {
